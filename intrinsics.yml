@@ -1,0 +1,10 @@
+%YAML:1.0
+calibration_time: ""
+image_width: 848
+image_height: 478
+camera_matrix: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   data: [ 700, 0., 424, 0.,
+       700, 239, 0., 0., 1. ]
