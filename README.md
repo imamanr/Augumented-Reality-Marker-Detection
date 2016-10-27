@@ -14,7 +14,8 @@ Concrete tasks
 
 * Support multiple markers.
   
-
+![alt tag](http://virtual.vtt.fi/virtual/proj2/multimedia/media/images/MultiMarker.jpg)
+ 
 Building and Running
 ---
 A standard OpenCV-oriented Makefile was created for easy building in a linux-esque environment.
