@@ -14,16 +14,13 @@ dependencies:
   # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
       - sudo apt-get install libstdc++-4.8-dev
 #install cmake
+      - cd
       - wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz
       - openssl sha1 cmake-3.2.2.tar.gz
       - tar xf cmake-3.2.2.tar.gz
-      - cd cmake-3.2.2
-      - ls
-      - ./bootstrap --prefix=~
-      - make
-      - make install
+      - cd cmake-3.2.2 && ./bootstrap --prefix=~ && make && make install && cd ..
       - export PATH="~/bin:${PATH}"
-      - cd ..
+      
 #cppunittest
       - sudo apt-get install libcppunit-dev
       - sudo apt-get install -y build-essential
@@ -33,37 +30,12 @@ dependencies:
   # Download v3.0.0 .zip file and extract.
       - curl -sL https://github.com/Itseez/opencv/archive/3.0.0-beta.zip > opencv.zip
       - unzip opencv.zip
-      - cd opencv-3.0.0-beta
-  
-  # Create a new 'build' folder.
-      - mkdir build
-      - cd build
-  
-  # Set build instructions for Ubuntu distro.
-      - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
-  
-  # Run 'make' with four threads.
-      - make -j4
-  
-  # Install to OS.
-      - sudo make install
-  
-  # Add configuration to OpenCV to tell it where the library files are located on the file system (/usr/local/lib)
-      - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
-      - sudo ldconfig
-      - echo "OpenCV installed."
-      - cd ../../
+      - cd opencv-3.0.0-beta && mkdir build && cd build && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON .. && make -j4 && sudo make install && sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf' && sudo ldconfig && echo "OpenCV installed." && cd ../../
 
 #Boost
       - wget -O boost_1_55_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
       - tar xzvf boost_1_55_0.tar.gz
-      - cd boost_1_55_0/
-      - sudo apt-get update
-      - sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev
-      - ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test
-      - ./b2
-      - sudo ./b2 install
-      - cd ../../
+      - cd boost_1_55_0/ && sudo apt-get update && sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev && ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test && ./b2 && sudo ./b2 install && cd ../../
 
 compile:
     override:
