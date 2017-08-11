@@ -23,6 +23,45 @@ dependencies:
       - make install
       - export PATH="~/bin:${PATH}"
       - cd ..
+#cppunittest
+      - sudo apt-get install libcppunit-dev
+      - sudo apt-get install -y build-essential
+      - sudo apt-get install -y cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+      - sudo apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+  # Download v3.0.0 .zip file and extract.
+      - curl -sL https://github.com/Itseez/opencv/archive/3.0.0-beta.zip > opencv.zip
+      - unzip opencv.zip
+      - cd opencv-3.0.0-beta
+  
+  # Create a new 'build' folder.
+      - mkdir build
+      - cd build
+  
+  # Set build instructions for Ubuntu distro.
+      - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
+  
+  # Run 'make' with four threads.
+      - make -j4
+  
+  # Install to OS.
+      - sudo make install
+  
+  # Add configuration to OpenCV to tell it where the library files are located on the file system (/usr/local/lib)
+      - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+      - sudo ldconfig
+      - echo "OpenCV installed."
+
+#Boost
+      - wget -O boost_1_55_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
+      - tar xzvf boost_1_55_0.tar.gz
+      - cd boost_1_55_0/
+      - sudo apt-get update
+      - sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev
+      - ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test
+      - ./b2
+      - sudo ./b2 install
+
 compile:
     override:
         # Place here whatever commands are necessary to build your project.
