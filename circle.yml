@@ -18,7 +18,7 @@ dependencies:
       - openssl sha1 cmake-3.2.2.tar.gz
       - tar xf cmake-3.2.2.tar.gz
       - cd cmake-3.2.2
-      - pwd
+      - ls
       - ./bootstrap --prefix=~
       - make
       - make install
