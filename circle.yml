@@ -14,10 +14,10 @@ dependencies:
   # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
       - sudo apt-get install libstdc++-4.8-dev
 #install cmake
-      - wget "http://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
-      - openssl sha1 "cmake-${CMAKE_VERSION}.tar.gz"
-      - tar xf "cmake-${CMAKE_VERSION}.tar.gz"
-      - cd "cmake-${CMAKE_VERSION}"
+      - wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz
+      - openssl sha1 cmake-3.2.2.tar.gz
+      - tar xf cmake-3.2.2.tar.gz
+      - cd cmake-3.2.2
       - ./bootstrap --prefix=~
       - make
       - make install
