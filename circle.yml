@@ -7,12 +7,26 @@ dependencies:
     pre:
         # Install a few packages which will be needed for building the cross compiler.
       - sudo apt-get update
-
+      - sudo apt-get update
+      - sudo apt-get install g++-4.8
+      - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+      - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
+  # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
+      - sudo apt-get install libstdc++-4.8-dev
+#install cmake
+      - wget "http://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
+      - openssl sha1 "cmake-${CMAKE_VERSION}.tar.gz"
+      - tar xf "cmake-${CMAKE_VERSION}.tar.gz"
+      - cd "cmake-${CMAKE_VERSION}"
+      - ./bootstrap --prefix=~
+      - make
+      - make install
+      - export PATH="~/bin:${PATH}"
+      - cd ..
 compile:
     override:
         # Place here whatever commands are necessary to build your project.
       - make
-
 
 test:
     override:
