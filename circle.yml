@@ -1,0 +1,35 @@
+dependencies:
+    pre:
+        # Install a few packages which will be needed for building the cross compiler.
+        - sudo apt-get update
+        - sudo apt-get install grub-pc
+        - sudo apt-get install libgmp3-dev
+        - sudo apt-get install libmpfr-dev
+        - sudo apt-get install libmpc-dev
+        - sudo apt-get install texinfo
+        - sudo apt-get install libisl-dev
+        - sudo apt-get install libcloog-isl-dev
+ 
+        # Build the cross compiler for your chosen target (replace i786-pc-elf if necessary).
+        - bash ci/toolchain.sh i786-pc-elf
+
+    cache_directories:
+        # Add the folder with our cross compiler to the cache. This way it will be kept between builds.
+        - ~/cross
+
+compile:
+    override:
+        # Place here whatever commands are necessary to build your project.
+        - bash your_build_script.sh
+ 
+        # Copy any files you want to keep to the folder $CIRCLE_ARTIFACTS.
+        - cp my_kernel my_image.iso $CIRCLE_ARTIFACTS/
+
+test:
+    override:
+        # Place here any automated test you would like to run after the build (unit tests, boot up a VM and collect output...)
+        - bash your_test_suite.sh
+ 
+        # You must place something here, even it it's just testing whether the output exists.
+        - test -f $CIRCLE_ARTIFACTS/my_kernel
+        - test -f $CIRCLE_ARTIFACTS/my_image.iso
