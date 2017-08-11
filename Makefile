@@ -1,4 +1,4 @@
-CXXFLAGS =	-std=c++11 -O2 -g -Wall -fmessage-length=0 -I/usr/local/include
+CXXFLAGS =	-std=c++11 -O2 -g -Wall -fmessage-length=0 -I/usr/local/include -I/usr/inlcude
 
 OBJS =		AugmentedReality.o
 
