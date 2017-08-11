@@ -1,3 +1,8 @@
+general:
+  branches:
+    only:
+      - master
+
 dependencies:
     pre:
         # Install a few packages which will be needed for building the cross compiler.
@@ -50,10 +55,6 @@ dependencies:
        - (cd $BOOST_ROOT; ./bootstrap.sh --with-libraries=date_time,filesystem,system,iostreams,regex,python,test)
        - (cd $BOOST_ROOT; ./b2 threading=multi --prefix=$BOOST_ROOT -d0 install)
 
-    cache_directories:
-        # Add the folder with our cross compiler to the cache. This way it will be kept between builds.
-        - ~/cross
-
 compile:
     override:
         # Place here whatever commands are necessary to build your project.
@@ -64,6 +65,4 @@ test:
     override:
         # Place here any automated test you would like to run after the build (unit tests, boot up a VM and collect output...)
         - bash augmented-reality
- 
-        # You must place something here, even it it's just testing whether the output exists.
-        - test -f 
+        - echo "Nothing to do here"
