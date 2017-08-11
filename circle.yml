@@ -8,9 +8,9 @@ dependencies:
         # Install a few packages which will be needed for building the cross compiler.
       - sudo apt-get update
       - sudo apt-get update
-      - sudo apt-get install g++-5.0
-      - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5.0 90
-      - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5.0 90
+      - sudo apt-get install g++-4.8
+      - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+      - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
   # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
       - sudo apt-get install libstdc++-4.8-dev
 #install cmake
@@ -63,7 +63,7 @@ dependencies:
       - ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test
       - ./b2
       - sudo ./b2 install
-      - cd ..
+      - cd ../../
 
 compile:
     override:
