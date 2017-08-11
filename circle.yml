@@ -12,6 +12,43 @@ dependencies:
  
         # Build the cross compiler for your chosen target (replace i786-pc-elf if necessary).
         - bash ci/toolchain.sh i786-pc-elf
+        - sudo apt-get install -y build-essential
+
+        - sudo apt-get install -y cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+        - sudo apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+  # Download v3.0.0 .zip file and extract.
+        - curl -sL https://github.com/Itseez/opencv/archive/3.0.0-beta.zip > opencv.zip
+        - unzip opencv.zip
+        - cd opencv-3.0.0-beta
+  
+  # Create a new 'build' folder.
+        - mkdir build
+        - cd build
+  
+  # Set build instructions for Ubuntu distro.
+        - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
+  
+  # Run 'make' with four threads.
+       - make -j4
+  
+  # Install to OS.
+       - sudo make install
+  
+  # Add configuration to OpenCV to tell it where the library files are located on the file system (/usr/local/lib)
+       - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+       - sudo ldconfig
+       - echo "OpenCV installed."
+#CPPUNIT
+       - sudo apt-get install libcppunit-dev
+#BOOST
+       - wget --no-verbose --output-document=boost-trunk.tar.bz2 http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.bz2/download
+       - export BOOST_ROOT="$TRAVIS_BUILD_DIR/../boost-trunk"
+       - export CMAKE_MODULE_PATH="$BOOST_ROOT"
+       - mkdir -p $BOOST_ROOT
+       - tar jxf boost-trunk.tar.bz2 --strip-components=1 -C $BOOST_ROOT
+       - (cd $BOOST_ROOT; ./bootstrap.sh --with-libraries=date_time,filesystem,system,iostreams,regex,python,test)
+       - (cd $BOOST_ROOT; ./b2 threading=multi --prefix=$BOOST_ROOT -d0 install)
 
     cache_directories:
         # Add the folder with our cross compiler to the cache. This way it will be kept between builds.
@@ -20,16 +57,13 @@ dependencies:
 compile:
     override:
         # Place here whatever commands are necessary to build your project.
-        - bash your_build_script.sh
- 
-        # Copy any files you want to keep to the folder $CIRCLE_ARTIFACTS.
-        - cp my_kernel my_image.iso $CIRCLE_ARTIFACTS/
+        - make
+
 
 test:
     override:
         # Place here any automated test you would like to run after the build (unit tests, boot up a VM and collect output...)
-        - bash your_test_suite.sh
+        - bash augmented-reality
  
         # You must place something here, even it it's just testing whether the output exists.
-        - test -f $CIRCLE_ARTIFACTS/my_kernel
-        - test -f $CIRCLE_ARTIFACTS/my_image.iso
+        - test -f 
