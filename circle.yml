@@ -14,7 +14,6 @@ dependencies:
   # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
       - sudo apt-get install libstdc++-4.8-dev
 #install cmake
-      - cd
       - wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz
       - openssl sha1 cmake-3.2.2.tar.gz
       - tar xf cmake-3.2.2.tar.gz
@@ -31,7 +30,10 @@ dependencies:
 
   # Download v3.0.0 .zip file and extract.
       - git clone https://github.com/Itseez/opencv.git
-      - cd opencv && git checkout 3.2.0 && mkdir build && cd build && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON .. && make -j4 && sudo make install && sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf' && sudo ldconfig && echo "OpenCV installed." && cd ../../
+      - cd opencv && git checkout 3.2.0 && mkdir build && cd build 
+      - ls
+      - pwd
+      - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON .. && make -j4 && sudo make install && sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf' && sudo ldconfig && echo "OpenCV installed." && cd ../../
 
 #Boost
       - wget -O boost_1_55_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
