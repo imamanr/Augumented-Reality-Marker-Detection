@@ -51,6 +51,7 @@ dependencies:
       - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
       - sudo ldconfig
       - echo "OpenCV installed."
+      - cd ../../
 
 #Boost
       - wget -O boost_1_55_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
@@ -61,6 +62,7 @@ dependencies:
       - ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test
       - ./b2
       - sudo ./b2 install
+      - cd ..
 
 compile:
     override:
