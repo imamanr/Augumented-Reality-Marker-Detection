@@ -29,16 +29,16 @@ dependencies:
       - sudo apt-get -y install cmake libeigen3-dev
       - sudo apt-get -y install opencl-headers libtbb-dev
       - sudo apt-get -y install libjpeg-dev libjasper-dev libpng++-dev libtiff-dev libopenexr-dev libwebp-dev
-      - bash script/install_opencv.sh
+#      - bash script/install_opencv2.sh
 
 #QT
 
       - sudo add-apt-repository ppa:beineri/opt-qt59-xenial -y && sudo apt-get update
-      - 
+      - sudo apt-get install qt59-meta-full qt59base qt59creator qt59quickcontrols qt59tools 
 #Boost
-      - wget -O boost_1_55_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
-      - tar xzvf boost_1_55_0.tar.gz
-      - cd boost_1_55_0/ && sudo apt-get update && sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev && ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test && ./b2 && sudo ./b2 install && cd ../../
+      - wget -O boost_1_62_0.tar.gz https://sourceforge.net/projects/boost/files/boost/1.62.0/boost_1_62_0.tar.gz/download
+      - tar xzvf boost_1_62_0.tar.gz
+      - cd boost_1_62_0/ && sudo apt-get update && sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev && ./bootstrap.sh --prefix=/usr/ --with-libraries=date_time,filesystem,system,iostreams,regex,python,test && ./b2 && sudo ./b2 install && cd ../../
 
 compile:
     override:
