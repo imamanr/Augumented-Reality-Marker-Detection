@@ -6,13 +6,12 @@ general:
 dependencies:
     pre:
         # Install a few packages which will be needed for building the cross compiler.
-      - sudo apt-get update
-      - sudo apt-get update
-      - sudo apt-get install g++-4.8
-      - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
-      - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
+      - sudo add-apt-repository ppa:ubuntu-toolchain-r/test && sudo apt-get update && sudo apt-get install gcc-6 g++-6
+#      - sudo apt-get install g++-5.0
+      - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+      - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
   # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
-      - sudo apt-get install libstdc++-4.8-dev
+      - sudo apt-get install libstdc++-6.0-dev
 #install cmake
       - wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz
       - openssl sha1 cmake-3.2.2.tar.gz
@@ -30,7 +29,7 @@ dependencies:
 
   # Download v3.0.0 .zip file and extract.
       - git clone https://github.com/Itseez/opencv.git 
-      - cd opencv && git checkout 3.2.0 && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -DWITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON -DBUILD_EXAMPLES=ON -DWITH_QT=ON -DWITH_OPENGL=ON .. && make -j4 && sudo make install && sudo ldconfig && echo "OpenCV installed." && cd ../../
+      - cd opencv && git checkout 3.2.0 && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -D BUILD_NEW_PYTHON_SUPPORT=ON -DINSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON -DBUILD_EXAMPLES=ON -DOPENCV_ICV_URL="http://downloads.sourceforge.net/project/opencvlibrary/3rdparty/ippicv" .. && make -j4 && sudo make install && sudo ldconfig && echo "OpenCV installed." && cd ../../
 
 
 #Boost
