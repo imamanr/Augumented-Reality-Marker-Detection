@@ -49,12 +49,11 @@ dependencies:
       - wget -O visageSDK-Linux.tar.gz https://drive.google.com/file/d/0B42K6KJGzYPMS2pEQzRCSC15NHc/view?usp=sharing
       - unzip visageSDK-Linux.zip
       - cd visage_linux && sudo cp -a include/. /usr/local/include && cp -a lib/. /usr/local/lib && cp -a bin/. /usr/local/bin
- 
 
 compile:
     override:
         # Place here whatever commands are necessary to build your project.
-      - make
+      - mkdir build && cd build && cmake .. && make -j6
 
 test:
     override:
