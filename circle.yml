@@ -28,7 +28,7 @@ dependencies:
       - sudo apt-get -y update;
       - sudo apt-get -y install opencl-headers libtbb-dev
       - sudo apt-get -y install libjpeg-dev libjasper-dev libpng++-dev libtiff-dev libopenexr-dev libwebp-dev
-      - bash script/install_opencv3.sh
+#      - bash script/install_opencv3.sh
 
 #QT
 #      - sudo add-apt-repository ppa:beineri/opt-qt59-trusty -y && sudo apt-get update
@@ -45,10 +45,14 @@ dependencies:
       - sudo apt-get install libsdl2-dev
 #visage
       - sudo apt-get install zip
-      - wget -O visageSDK-Linux.tar.gz https://drive.google.com/file/d/0B42K6KJGzYPMS2pEQzRCSC15NHc/view?usp=sharing
+      - wget -O visageSDK-Linux.zip https://drive.google.com/file/d/0B42K6KJGzYPMS2pEQzRCSC15NHc/view?usp=sharing
       - unzip visageSDK-Linux.zip
       - cd visage_linux && sudo cp -a include/. /usr/local/include && cp -a lib/. /usr/local/lib && cp -a bin/. /usr/local/bin
-
+#openmesh
+      - wget https://www.openmesh.org/media/Releases/3.1/OpenMesh-3.1.tar.gz
+      - tar -xvf OpenMesh-3.1.tar.gz
+      - cd OpenMesh-3.1 && mkdir build && cd build && cmake -DBUILD_APPS=OFF -DCMAKE_INSTALL_PREFIX=/usr/local/ .. && make -j4 && sudo make install
+ 
 compile:
     override:
         # Place here whatever commands are necessary to build your project.
