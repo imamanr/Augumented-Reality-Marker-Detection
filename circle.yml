@@ -47,7 +47,7 @@ dependencies:
       - sudo apt-get install zip
       - wget -O visageSDK-Linux.zip  https://drive.google.com/uc\?export\=download\&id\=0B42K6KJGzYPMS2pEQzRCSC15NHc
       - unzip visageSDK-Linux.zip
-      - cd visageSDK-Linux && sudo cp -a include/. /usr/local/include && cp -a lib/. /usr/local/lib && cp -a bin/. /usr/local/bin
+      - cd visageSDK-Linux && sudo cp -a include/. /usr/local/include && sudo cp -a lib/. /usr/local/lib && sudo cp -a bin/. /usr/local/bin
 #openmesh
       - wget https://www.openmesh.org/media/Releases/3.1/OpenMesh-3.1.tar.gz
       - tar -xvf OpenMesh-3.1.tar.gz
